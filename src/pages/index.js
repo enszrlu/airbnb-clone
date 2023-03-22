@@ -5,6 +5,8 @@ import jsonData from '../../public/json/places.json';
 import cardsJson from '../../public/json/cards.json';
 import SmallCard from '@/components/SmallCard';
 import MediumCard from '@/components/MediumCard';
+import LargeCard from '@/components/LargeCard';
+import Footer from '@/components/Footer';
 
 export default function Home({ exploreData, cardsData }) {
     return (
@@ -32,11 +34,20 @@ export default function Home({ exploreData, cardsData }) {
                 <section>
                     <h2 className="text-4xl font-semibold py-8">Live Anywhere</h2>
 
-                    {cardsData.map((item) => (
-                        <MediumCard key={item.img} img={item.img} title={item.title} />
-                    ))}
+                    <div className="flex overflow-scroll scrollbar-hide p-3 -ml-3">
+                        {cardsData.map((item) => (
+                            <MediumCard key={item.img} img={item.img} title={item.title} />
+                        ))}
+                    </div>
                 </section>
+                <LargeCard
+                    image="https://links.papareact.com/4cj"
+                    title="The Greatest Outdoors"
+                    description="Wishlists curated by Airbnb"
+                    buttonText="Get Inspired"
+                ></LargeCard>
             </main>
+            <Footer></Footer>
         </>
     );
 }
