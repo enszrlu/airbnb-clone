@@ -7,8 +7,36 @@ import SmallCard from '@/components/SmallCard';
 import MediumCard from '@/components/MediumCard';
 import LargeCard from '@/components/LargeCard';
 import Footer from '@/components/Footer';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Home({ exploreData, cardsData }) {
+    const divRef = useRef(null);
+    const [scrollPos, setScrollPos] = useState(0);
+    const [isRightScrollingActive, setIsRightScrollingActive] = useState(false);
+    const [isLeftScrollingActive, setIsLeftScrollingActive] = useState(false);
+
+    useEffect(() => {
+        let interval;
+        if (isRightScrollingActive) {
+            interval = setInterval(() => {
+                setScrollPos((scrollPos) =>
+                    Math.min(scrollPos + 1, divRef.current.scrollWidth - divRef.current.clientWidth)
+                );
+            }, 1);
+        }
+        if (isLeftScrollingActive) {
+            console.log(divRef.current.clientWidth);
+            interval = setInterval(() => {
+                setScrollPos((scrollPos) => Math.max(scrollPos - 1, 0));
+            }, 1);
+        }
+        return () => clearInterval(interval);
+    }, [isRightScrollingActive, isLeftScrollingActive]);
+
+    if (divRef.current) {
+        divRef.current.scrollLeft = scrollPos;
+    }
+
     return (
         <>
             <Head>
@@ -34,10 +62,22 @@ export default function Home({ exploreData, cardsData }) {
                 <section>
                     <h2 className="text-4xl font-semibold py-8">Live Anywhere</h2>
 
-                    <div className="flex overflow-scroll scrollbar-hide p-3 -ml-3">
-                        {cardsData.map((item) => (
-                            <MediumCard key={item.img} img={item.img} title={item.title} />
-                        ))}
+                    <div className="relative">
+                        <div ref={divRef} className="flex overflow-scroll scrollbar-hide p-3 -ml-3">
+                            {cardsData.map((item) => (
+                                <MediumCard key={item.img} img={item.img} title={item.title} />
+                            ))}
+                        </div>
+                        <div
+                            onMouseEnter={() => setIsLeftScrollingActive(true)}
+                            onMouseLeave={() => setIsLeftScrollingActive(false)}
+                            className="absolute top-3 h-5/6 w-6 left-[-12px] hover:bg-gray-50"
+                        ></div>
+                        <div
+                            onMouseEnter={() => setIsRightScrollingActive(true)}
+                            onMouseLeave={() => setIsRightScrollingActive(false)}
+                            className="absolute top-3 h-5/6 w-6 right-[-5px] hover:bg-gray-50"
+                        ></div>
                     </div>
                 </section>
                 <LargeCard
