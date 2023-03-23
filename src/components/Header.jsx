@@ -92,19 +92,20 @@ function Header({
             </div>
 
             {searchInput && (
-                <div className="flex flex-col col-span-3 mx-auto p-5 shadow-md">
+                <div className="flex flex-col col-span-3 mx-auto p-5 shadow-md max-w-md md:max-w-none">
                     <DateRangePicker
                         ranges={[selectionRange]}
                         minDate={new Date()}
                         rangeColors={['#FD5B61']}
                         onChange={handleSelect}
+                        className="scale-75 md:scale-100"
                     />
                     <div className="flex items-center border-b mb-4">
-                        <h2 className="text-2xl flex-grow">Number of Guests</h2>
+                        <h2 className="text-lg flex-grow md:text-2xl ">Number of Guests</h2>
                         <UsersIcon className="h-5"></UsersIcon>
                         <input
                             type="number"
-                            className="w-12 pl-2 text-lg outline-none text-red-400"
+                            className="w-8 pl-2 text-lg outline-none text-red-400  md:w-12"
                             value={noOfGuests}
                             min={1}
                             onChange={(e) => setNoOfGuests(e.target.value)}
