@@ -40,3 +40,9 @@ a {
 .rdrInputRange + .rdrInputRange {
     display: flex;
 }
+
+@media (max-width: 500px) {
+    .rdrDefinedRangesWrapper {
+        display: none;
+    }
+}

@@ -31,6 +31,7 @@ Extras I have Included:
 
 -   Scroll when hover on corner of Live Anywhere cards
 -   Remember Date and Guest selections on calendar after search
+-   Mobile Friendly Calendar
 
 ## My process
 
