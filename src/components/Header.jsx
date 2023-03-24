@@ -98,7 +98,7 @@ function Header({
                         minDate={new Date()}
                         rangeColors={['#FD5B61']}
                         onChange={handleSelect}
-                        className="scale-75 md:scale-100 m-0 p-0"
+                        className="scale-90 md:scale-100 m-0 p-0"
                     />
                     <div className="flex items-center border-b mb-4">
                         <h2 className="text-lg flex-grow md:text-2xl ">Number of Guests</h2>
